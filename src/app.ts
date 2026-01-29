@@ -35,9 +35,23 @@ app.use(
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
-// Health check
+// Health check & server status (GET)
 app.get('/health', (_req: Request, res: Response) => {
-  res.status(200).json({ status: 'OK', message: 'Server is running' });
+  const port = process.env.PORT || 5000;
+  res.status(200).json({
+    status: 'OK',
+    message: `Server is running on port ${port}`,
+    port: Number(port),
+  });
+});
+
+app.get('/api/server', (_req: Request, res: Response) => {
+  const port = process.env.PORT || 5000;
+  res.status(200).json({
+    status: 'OK',
+    message: `Server is running on port ${port}`,
+    port: Number(port),
+  });
 });
 
 // API Routes
