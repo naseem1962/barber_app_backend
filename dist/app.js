@@ -22,13 +22,21 @@ dotenv_1.default.config();
 const app = (0, express_1.default)();
 // Middleware
 app.use((0, helmet_1.default)());
+// CORS: allow production frontends (Vercel) and localhost for dev.
+// On Vercel, env vars may be unset, so we default to production URLs.
+const allowedOrigins = [
+    process.env.USER_WEB_URL || 'https://barber-user-webapp.vercel.app',
+    process.env.BARBER_WEB_URL || 'https://barber-vendor-webapp.vercel.app',
+    process.env.ADMIN_DASHBOARD_URL || 'https://barber-admin-ten.vercel.app',
+    'http://localhost:3000',
+    'http://localhost:4200',
+    'http://localhost:3001',
+];
 app.use((0, cors_1.default)({
-    origin: [
-        process.env.USER_WEB_URL || 'http://localhost:3000',
-        process.env.BARBER_WEB_URL || 'http://localhost:4200',
-        process.env.ADMIN_DASHBOARD_URL || 'http://localhost:3001',
-    ],
+    origin: allowedOrigins,
     credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 app.use(express_1.default.json({ limit: '10mb' }));
 app.use(express_1.default.urlencoded({ extended: true, limit: '10mb' }));
