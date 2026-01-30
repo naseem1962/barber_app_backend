@@ -9,7 +9,7 @@ const errorHandler_middleware_1 = require("./errorHandler.middleware");
 const User_model_1 = __importDefault(require("../models/User.model"));
 const Barber_model_1 = __importDefault(require("../models/Barber.model"));
 const Admin_model_1 = __importDefault(require("../models/Admin.model"));
-const authenticate = async (req, res, next) => {
+const authenticate = async (req, _res, next) => {
     try {
         const token = req.headers.authorization?.replace('Bearer ', '');
         if (!token) {
@@ -50,7 +50,7 @@ const authenticate = async (req, res, next) => {
 };
 exports.authenticate = authenticate;
 const authorize = (...roles) => {
-    return (req, res, next) => {
+    return (req, _res, next) => {
         if (!req.user) {
             return next(new errorHandler_middleware_1.AppError('Authentication required', 401));
         }

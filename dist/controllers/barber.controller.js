@@ -9,9 +9,7 @@ const Barber_model_1 = __importDefault(require("../models/Barber.model"));
 const errorHandler_middleware_1 = require("../middleware/errorHandler.middleware");
 // Generate JWT Token
 const generateToken = (id, userType) => {
-    return jsonwebtoken_1.default.sign({ id, userType }, process.env.JWT_SECRET || 'secret', {
-        expiresIn: process.env.JWT_EXPIRE || '7d',
-    });
+    return jsonwebtoken_1.default.sign({ id, userType }, process.env.JWT_SECRET || 'secret', { expiresIn: (process.env.JWT_EXPIRE || '7d') });
 };
 // Register Barber
 const registerBarber = async (req, res, next) => {
@@ -115,7 +113,7 @@ const updateBarberProfile = async (req, res, next) => {
 };
 exports.updateBarberProfile = updateBarberProfile;
 // Get All Barbers
-const getAllBarbers = async (req, res, next) => {
+const getAllBarbers = async (_req, res, next) => {
     try {
         const barbers = await Barber_model_1.default.find({ isActive: true, isVerified: true })
             .select('-password')

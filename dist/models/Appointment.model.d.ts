@@ -16,6 +16,8 @@ export interface IAppointment extends Document {
     createdAt: Date;
     updatedAt: Date;
 }
-declare const _default: any;
+declare const _default: mongoose.Model<IAppointment, {}, {}, {}, mongoose.Document<unknown, {}, IAppointment> & IAppointment & {
+    _id: mongoose.Types.ObjectId;
+}, any>;
 export default _default;
 //# sourceMappingURL=Appointment.model.d.ts.map

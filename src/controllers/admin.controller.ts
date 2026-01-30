@@ -8,9 +8,11 @@ import { AuthRequest } from '../middleware/auth.middleware';
 
 // Generate JWT Token
 const generateToken = (id: string, userType: string): string => {
-  return jwt.sign({ id, userType }, process.env.JWT_SECRET || 'secret', {
-    expiresIn: process.env.JWT_EXPIRE || '7d',
-  });
+  return jwt.sign(
+    { id, userType },
+    process.env.JWT_SECRET || 'secret',
+    { expiresIn: (process.env.JWT_EXPIRE || '7d') } as jwt.SignOptions
+  );
 };
 
 // Register Admin
@@ -102,7 +104,7 @@ export const loginAdmin = async (
 
 // Get Dashboard Stats
 export const getDashboardStats = async (
-  req: AuthRequest,
+  _req: AuthRequest,
   res: Response,
   next: NextFunction
 ): Promise<void> => {
@@ -128,7 +130,7 @@ export const getDashboardStats = async (
 
 // Get All Users
 export const getAllUsers = async (
-  req: AuthRequest,
+  _req: AuthRequest,
   res: Response,
   next: NextFunction
 ): Promise<void> => {
@@ -146,7 +148,7 @@ export const getAllUsers = async (
 
 // Get All Barbers
 export const getAllBarbers = async (
-  req: AuthRequest,
+  _req: AuthRequest,
   res: Response,
   next: NextFunction
 ): Promise<void> => {

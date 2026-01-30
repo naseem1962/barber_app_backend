@@ -9,9 +9,7 @@ const User_model_1 = __importDefault(require("../models/User.model"));
 const errorHandler_middleware_1 = require("../middleware/errorHandler.middleware");
 // Generate JWT Token
 const generateToken = (id, userType) => {
-    return jsonwebtoken_1.default.sign({ id, userType }, process.env.JWT_SECRET || 'secret', {
-        expiresIn: process.env.JWT_EXPIRE || '7d',
-    });
+    return jsonwebtoken_1.default.sign({ id, userType }, process.env.JWT_SECRET || 'secret', { expiresIn: (process.env.JWT_EXPIRE || '7d') });
 };
 // Register User
 const registerUser = async (req, res, next) => {

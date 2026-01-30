@@ -18,7 +18,8 @@ function getOpenAIClient() {
 // AI Hairstyle Recommendation
 const getHairstyleRecommendation = async (req, res, next) => {
     try {
-        const { faceShape, hairType, hairDensity, imageUrl } = req.body;
+        const body = req.body;
+        const { faceShape, hairType, hairDensity } = body;
         // Get user data if available
         let userData = {};
         if (req.user) {

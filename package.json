@@ -7,6 +7,7 @@
     "dev": "nodemon src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js",
+    "test:health": "node scripts/test-health.js",
     "lint": "eslint src --ext .ts",
     "test": "jest"
   },

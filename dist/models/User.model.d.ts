@@ -21,6 +21,8 @@ export interface IUser extends Document {
     updatedAt: Date;
     comparePassword(candidatePassword: string): Promise<boolean>;
 }
-declare const _default: any;
+declare const _default: mongoose.Model<IUser, {}, {}, {}, mongoose.Document<unknown, {}, IUser> & IUser & {
+    _id: mongoose.Types.ObjectId;
+}, any>;
 export default _default;
 //# sourceMappingURL=User.model.d.ts.map

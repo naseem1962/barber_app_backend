@@ -1,4 +1,4 @@
-import { Document } from 'mongoose';
+import mongoose, { Document } from 'mongoose';
 export interface IBarber extends Document {
     name: string;
     email: string;
@@ -40,6 +40,8 @@ export interface IBarber extends Document {
     updatedAt: Date;
     comparePassword(candidatePassword: string): Promise<boolean>;
 }
-declare const _default: any;
+declare const _default: mongoose.Model<IBarber, {}, {}, {}, mongoose.Document<unknown, {}, IBarber> & IBarber & {
+    _id: mongoose.Types.ObjectId;
+}, any>;
 export default _default;
 //# sourceMappingURL=Barber.model.d.ts.map

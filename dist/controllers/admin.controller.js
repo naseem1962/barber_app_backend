@@ -11,9 +11,7 @@ const Barber_model_1 = __importDefault(require("../models/Barber.model"));
 const errorHandler_middleware_1 = require("../middleware/errorHandler.middleware");
 // Generate JWT Token
 const generateToken = (id, userType) => {
-    return jsonwebtoken_1.default.sign({ id, userType }, process.env.JWT_SECRET || 'secret', {
-        expiresIn: process.env.JWT_EXPIRE || '7d',
-    });
+    return jsonwebtoken_1.default.sign({ id, userType }, process.env.JWT_SECRET || 'secret', { expiresIn: (process.env.JWT_EXPIRE || '7d') });
 };
 // Register Admin
 const registerAdmin = async (req, res, next) => {
@@ -86,7 +84,7 @@ const loginAdmin = async (req, res, next) => {
 };
 exports.loginAdmin = loginAdmin;
 // Get Dashboard Stats
-const getDashboardStats = async (req, res, next) => {
+const getDashboardStats = async (_req, res, next) => {
     try {
         const totalUsers = await User_model_1.default.countDocuments({ isActive: true });
         const totalBarbers = await Barber_model_1.default.countDocuments({ isActive: true });
@@ -108,7 +106,7 @@ const getDashboardStats = async (req, res, next) => {
 };
 exports.getDashboardStats = getDashboardStats;
 // Get All Users
-const getAllUsers = async (req, res, next) => {
+const getAllUsers = async (_req, res, next) => {
     try {
         const users = await User_model_1.default.find().select('-password').sort({ createdAt: -1 });
         res.status(200).json({
@@ -122,7 +120,7 @@ const getAllUsers = async (req, res, next) => {
 };
 exports.getAllUsers = getAllUsers;
 // Get All Barbers
-const getAllBarbers = async (req, res, next) => {
+const getAllBarbers = async (_req, res, next) => {
     try {
         const barbers = await Barber_model_1.default.find().select('-password').sort({ createdAt: -1 });
         res.status(200).json({

@@ -1,15 +1,24 @@
 import { Request, Response, NextFunction } from 'express';
 
-export interface AppError extends Error {
-  statusCode?: number;
-  isOperational?: boolean;
+export class AppError extends Error {
+  statusCode: number;
+  isOperational: boolean;
+
+  constructor(message: string, statusCode: number = 500) {
+    super(message);
+    this.statusCode = statusCode;
+    this.isOperational = true;
+    if (typeof (Error as any).captureStackTrace === 'function') {
+      (Error as any).captureStackTrace(this, this.constructor);
+    }
+  }
 }
 
 export const errorHandler = (
   err: AppError,
-  req: Request,
+  _req: Request,
   res: Response,
-  next: NextFunction
+  _next: NextFunction
 ): void => {
   const statusCode = err.statusCode || 500;
   const message = err.message || 'Internal Server Error';
@@ -22,15 +31,3 @@ export const errorHandler = (
     },
   });
 };
-
-export class AppError extends Error {
-  statusCode: number;
-  isOperational: boolean;
-
-  constructor(message: string, statusCode: number = 500) {
-    super(message);
-    this.statusCode = statusCode;
-    this.isOperational = true;
-    Error.captureStackTrace(this, this.constructor);
-  }
-}

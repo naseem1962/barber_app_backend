@@ -20,6 +20,8 @@ export interface IChat extends Document {
     createdAt: Date;
     updatedAt: Date;
 }
-declare const _default: any;
+declare const _default: mongoose.Model<IChat, {}, {}, {}, mongoose.Document<unknown, {}, IChat> & IChat & {
+    _id: mongoose.Types.ObjectId;
+}, any>;
 export default _default;
 //# sourceMappingURL=Chat.model.d.ts.map

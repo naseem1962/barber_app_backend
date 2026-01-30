@@ -1,7 +1,18 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AppError = exports.errorHandler = void 0;
-const errorHandler = (err, req, res, next) => {
+exports.errorHandler = exports.AppError = void 0;
+class AppError extends Error {
+    constructor(message, statusCode = 500) {
+        super(message);
+        this.statusCode = statusCode;
+        this.isOperational = true;
+        if (typeof Error.captureStackTrace === 'function') {
+            Error.captureStackTrace(this, this.constructor);
+        }
+    }
+}
+exports.AppError = AppError;
+const errorHandler = (err, _req, res, _next) => {
     const statusCode = err.statusCode || 500;
     const message = err.message || 'Internal Server Error';
     res.status(statusCode).json({
@@ -13,13 +24,4 @@ const errorHandler = (err, req, res, next) => {
     });
 };
 exports.errorHandler = errorHandler;
-class AppError extends Error {
-    constructor(message, statusCode = 500) {
-        super(message);
-        this.statusCode = statusCode;
-        this.isOperational = true;
-        Error.captureStackTrace(this, this.constructor);
-    }
-}
-exports.AppError = AppError;
 //# sourceMappingURL=errorHandler.middleware.js.map

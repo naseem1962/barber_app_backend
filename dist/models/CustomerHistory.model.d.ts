@@ -13,6 +13,8 @@ export interface ICustomerHistory extends Document {
     review?: string;
     createdAt: Date;
 }
-declare const _default: any;
+declare const _default: mongoose.Model<ICustomerHistory, {}, {}, {}, mongoose.Document<unknown, {}, ICustomerHistory> & ICustomerHistory & {
+    _id: mongoose.Types.ObjectId;
+}, any>;
 export default _default;
 //# sourceMappingURL=CustomerHistory.model.d.ts.map

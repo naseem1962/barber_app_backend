@@ -11,6 +11,8 @@ export interface IContent extends Document {
     createdAt: Date;
     updatedAt: Date;
 }
-declare const _default: any;
+declare const _default: mongoose.Model<IContent, {}, {}, {}, mongoose.Document<unknown, {}, IContent> & IContent & {
+    _id: mongoose.Types.ObjectId;
+}, any>;
 export default _default;
 //# sourceMappingURL=Content.model.d.ts.map

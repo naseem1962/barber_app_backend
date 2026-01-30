@@ -3,6 +3,6 @@ export interface AuthRequest extends Request {
     user?: any;
     userType?: 'user' | 'barber' | 'admin';
 }
-export declare const authenticate: (req: AuthRequest, res: Response, next: NextFunction) => Promise<void>;
-export declare const authorize: (...roles: string[]) => (req: AuthRequest, res: Response, next: NextFunction) => void;
+export declare const authenticate: (req: AuthRequest, _res: Response, next: NextFunction) => Promise<void>;
+export declare const authorize: (...roles: string[]) => (req: AuthRequest, _res: Response, next: NextFunction) => void;
 //# sourceMappingURL=auth.middleware.d.ts.map
