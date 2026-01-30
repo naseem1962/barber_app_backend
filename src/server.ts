@@ -7,9 +7,9 @@ const httpServer = createServer(app);
 const io = new Server(httpServer, {
   cors: {
     origin: [
-      process.env.USER_WEB_URL || 'http://localhost:3000',
-      process.env.BARBER_WEB_URL || 'http://localhost:4200',
-      process.env.ADMIN_DASHBOARD_URL || 'http://localhost:3001',
+      process.env.USER_WEB_URL || 'https://barber-user-webapp.vercel.app',
+      process.env.BARBER_WEB_URL || 'https://barber-vendor-webapp.vercel.app',
+      process.env.ADMIN_DASHBOARD_URL || 'https://barber-admin-ten.vercel.app',
     ],
     credentials: true,
   },
