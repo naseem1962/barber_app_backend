@@ -19,8 +19,7 @@ export const getHairstyleRecommendation = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const body = req.body as { faceShape?: string; hairType?: string; hairDensity?: string };
-    const { faceShape, hairType, hairDensity } = body;
+    const { faceShape, hairType, hairDensity } = req.body as { faceShape?: string; hairType?: string; hairDensity?: string };
 
     // Get user data if available
     let userData: { faceShape?: string; hairType?: string; hairDensity?: string } = {};
@@ -95,7 +94,7 @@ export const predictNoShow = async (
     });
 
     const noShowCount = userAppointments.filter(
-      (apt: { status: string }) => apt.status === 'no_show'
+      (apt) => apt.status === 'no_show'
     ).length;
     const totalAppointments = userAppointments.length;
     const noShowRate = totalAppointments > 0 ? (noShowCount / totalAppointments) * 100 : 0;
@@ -201,12 +200,12 @@ export const getBusinessInsights = async (
 
     // Analyze data
     const totalEarnings = appointments.reduce(
-      (sum: number, apt: any) => sum + apt.service.price,
+      (sum, apt) => sum + apt.service.price,
       0
     );
 
     const earningsByDay: Record<string, number> = {};
-    appointments.forEach((apt: any) => {
+    appointments.forEach((apt) => {
       const day = apt.appointmentDate.toLocaleDateString('en-US', { weekday: 'long' });
       earningsByDay[day] = (earningsByDay[day] || 0) + apt.service.price;
     });

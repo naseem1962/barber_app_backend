@@ -161,7 +161,7 @@ export const markAsRead = async (
     }
 
     // Mark all messages from other participants as read
-    chat.messages.forEach((msg: any) => {
+    chat.messages.forEach((msg) => {
       if (
         msg.sender.toString() !== req.user._id.toString() &&
         !msg.read

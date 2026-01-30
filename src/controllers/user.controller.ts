@@ -6,11 +6,9 @@ import { AuthRequest } from '../middleware/auth.middleware';
 
 // Generate JWT Token
 const generateToken = (id: string, userType: string): string => {
-  return jwt.sign(
-    { id, userType },
-    process.env.JWT_SECRET || 'secret',
-    { expiresIn: (process.env.JWT_EXPIRE || '7d') } as jwt.SignOptions
-  );
+  const secret = process.env.JWT_SECRET || 'secret';
+  const expiresIn = process.env.JWT_EXPIRE || '7d';
+  return jwt.sign({ id, userType }, secret, { expiresIn } as jwt.SignOptions);
 };
 
 // Register User
