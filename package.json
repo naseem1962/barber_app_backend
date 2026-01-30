@@ -8,6 +8,7 @@
     "build": "tsc",
     "start": "node dist/server.js",
     "test:health": "node scripts/test-health.js",
+    "test:register": "node scripts/test-register-api.js",
     "lint": "eslint src --ext .ts",
     "test": "jest"
   },

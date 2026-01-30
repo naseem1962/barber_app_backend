@@ -40,16 +40,6 @@ app.use((0, cors_1.default)({
 }));
 app.use(express_1.default.json({ limit: '10mb' }));
 app.use(express_1.default.urlencoded({ extended: true, limit: '10mb' }));
-// On Vercel, the serverless function is mounted at /api, so paths are /api/health, /api/users, etc.
-// Rewrite req.url so Express routes (e.g. /health, /api/users) still match.
-app.use((req, _res, next) => {
-    if (req.path.startsWith('/api')) {
-        const rest = req.path.length > 4 ? req.path.slice(4) : '/';
-        const query = req.url.includes('?') ? '?' + req.url.split('?').slice(1).join('?') : '';
-        req.url = rest + query;
-    }
-    next();
-});
 // Health check & server status (GET)
 app.get('/health', (_req, res) => {
     const port = process.env.PORT || 5000;
