@@ -160,3 +160,28 @@ export const getAllBarbers = async (
     next(new AppError(error.message, 400));
   }
 };
+
+/** Get barber by ID (public, for detail/booking page). */
+export const getBarberById = async (
+  req: AuthRequest,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const { id } = req.params;
+    const barber = await Barber.findById(id)
+      .select('-password')
+      .where({ isActive: true, isVerified: true });
+
+    if (!barber) {
+      return next(new AppError('Barber not found', 404));
+    }
+
+    res.status(200).json({
+      success: true,
+      data: { barber },
+    });
+  } catch (error: any) {
+    next(new AppError(error.message, 400));
+  }
+};

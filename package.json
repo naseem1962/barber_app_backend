@@ -9,6 +9,7 @@
     "start": "node dist/server.js",
     "test:health": "node scripts/test-health.js",
     "test:register": "node scripts/test-register-api.js",
+    "seed:admin": "node scripts/seed-admin.js",
     "lint": "eslint src --ext .ts",
     "test": "jest"
   },

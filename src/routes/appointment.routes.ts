@@ -6,11 +6,13 @@ import {
   updateAppointmentStatus,
   saveCustomerHistory,
   getCustomerHistory,
+  getAvailability,
 } from '../controllers/appointment.controller';
 import { authenticate } from '../middleware/auth.middleware';
 
 const router = Router();
 
+router.get('/availability', getAvailability);
 router.post('/', authenticate, createAppointment);
 router.get('/user', authenticate, getUserAppointments);
 router.get('/barber', authenticate, getBarberAppointments);
